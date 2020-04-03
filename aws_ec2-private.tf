@@ -1,5 +1,5 @@
 resource "aws_security_group" "ec2-sg-webserver" {
-  name = "ec2-public-webserver-sg"
+  name = "ec2-private-webserver-sg"
   description = "Allow ssh & http inbound traffic"
   vpc_id = aws_vpc.template-vpc.id
 
