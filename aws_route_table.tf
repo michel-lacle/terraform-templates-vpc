@@ -21,3 +21,10 @@ resource "aws_route_table" "public_route_table" {
     Project = "terraform-templates-vpc"
   }
 }
+
+# we link our public route table to our public subnet
+resource "aws_route_table_association" "public_route_table_association" {
+
+  route_table_id = aws_route_table.public_route_table.id
+  subnet_id = aws_subnet.template-public.id
+}
