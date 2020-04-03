@@ -47,6 +47,8 @@ resource "aws_instance" "private-ec2-webserver" {
 
   user_data = file("webserver_install.sh")
 
+  associate_public_ip_address = true
+
   vpc_security_group_ids = [
     aws_security_group.ec2-private-sg-webserver.id]
 
