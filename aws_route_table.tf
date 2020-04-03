@@ -10,6 +10,11 @@ resource "aws_route_table" "public_route_table" {
     gateway_id = aws_internet_gateway.template-internet-gateway.id
   }
 
+  route {
+    ipv6_cidr_block = "::/0"
+    gateway_id = aws_internet_gateway.template-internet-gateway.id
+  }
+
   tags = {
     Name = "public-route-table"
     Owner = "terraform-templates-vpc"
