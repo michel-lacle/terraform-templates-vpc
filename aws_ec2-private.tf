@@ -1,4 +1,4 @@
-resource "aws_security_group" "ec2-sg-webserver" {
+resource "aws_security_group" "ec2-private-sg-webserver" {
   name = "ec2-private-webserver-sg"
   description = "Allow ssh & http inbound traffic"
   vpc_id = aws_vpc.template-vpc.id
@@ -36,7 +36,7 @@ resource "aws_security_group" "ec2-sg-webserver" {
   }
 }
 
-resource "aws_instance" "public-ec2-webserver" {
+resource "aws_instance" "private-ec2-webserver" {
   ami = "ami-0a887e401f7654935"
   instance_type = "t2.micro"
 
@@ -48,7 +48,7 @@ resource "aws_instance" "public-ec2-webserver" {
   user_data = file("webserver_install.sh")
 
   vpc_security_group_ids = [
-    aws_security_group.ec2-sg-webserver.id]
+    aws_security_group.ec2-private-sg-webserver.id]
 
   subnet_id = aws_subnet.template-private.id
 
