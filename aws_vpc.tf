@@ -4,7 +4,7 @@ resource "aws_vpc" "template-vpc" {
   assign_generated_ipv6_cidr_block = true
 
   tags = {
-    Name = "templates-vpc"
+    Name = "template-vpc"
     Owner = "terraform-templates-vpc"
     Project = "terraform-templates-vpc"
   }
