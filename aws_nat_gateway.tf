@@ -6,7 +6,7 @@ resource "aws_eip" "nat-elastic-ip" {
 
 resource "aws_nat_gateway" "nat-gateway" {
   allocation_id = aws_eip.nat-elastic-ip.id
-  subnet_id = aws_subnet.template-public
+  subnet_id = aws_subnet.template-public.id
 
   tags = {
     Name = "template-nat-gateway"
