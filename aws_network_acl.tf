@@ -15,7 +15,7 @@ resource "aws_network_acl" "main-acl" {
     action = "allow"
     from_port = 443
     protocol = "tcp"
-    rule_no = 100
+    rule_no = 200
     to_port = 443
   }
 
@@ -23,7 +23,7 @@ resource "aws_network_acl" "main-acl" {
     action = "allow"
     from_port = 22
     protocol = "tcp"
-    rule_no = 100
+    rule_no = 300
     to_port = 22
   }
 
