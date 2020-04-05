@@ -1,8 +1,8 @@
 resource "aws_network_acl" "main-acl" {
   vpc_id = aws_vpc.template-vpc.id
 
-  subnet_ids = [
-    aws_subnet.template-public.id]
+ # subnet_ids = [
+ #   aws_subnet.template-public.id]
 
   ingress {
     action = "allow"
