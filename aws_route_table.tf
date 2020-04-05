@@ -22,7 +22,13 @@ resource "aws_route_table" "public_route_table" {
   }
 }
 
-/*
+# we link our public route table to our public subnet
+resource "aws_route_table_association" "public_route_table_association" {
+
+  route_table_id = aws_route_table.public_route_table.id
+  subnet_id = aws_subnet.template-public.id
+}
+
 resource "aws_default_route_table" "default-route-table" {
   default_route_table_id = aws_vpc.template-vpc.default_route_table_id
 
@@ -36,4 +42,4 @@ resource "aws_default_route_table" "default-route-table" {
     Owner = "terraform-templates-vpc"
     Project = "terraform-templates-vpc"
   }
-}*/
+}
