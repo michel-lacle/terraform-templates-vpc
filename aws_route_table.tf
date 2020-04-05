@@ -39,7 +39,7 @@ data "aws_route_tables" "main-route-table" {
 
   filter {
     name   = "tag:Name"
-    values = ["!public-route-table"]
+    values = [""]
   }
 }
 
