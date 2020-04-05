@@ -40,6 +40,15 @@ resource "aws_network_acl" "main-acl" {
     cidr_block = "0.0.0.0/0"
   }
 
+    egress {
+    action = "allow"
+    from_port = 443
+    protocol = "tcp"
+    rule_no = 200
+    to_port = 443
+    cidr_block = "0.0.0.0/0"
+  }
+
   tags = {
     Name = "main-acl"
     Owner = "terraform-templates-vpc"
