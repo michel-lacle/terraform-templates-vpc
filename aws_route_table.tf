@@ -45,7 +45,7 @@ data "aws_route_tables" "main-route-table" {
 
 resource "aws_route" "r" {
   count                     = length(data.aws_route_tables.main-route-table.ids)
-  route_table_id            = data.aws_route_tables.main-route-table.ids[0]
+  route_table_id            = data.aws_route_tables.main-route-table.ids[count.index]
   destination_cidr_block    = "0.0.0.0/0"
   nat_gateway_id = aws_nat_gateway.nat-gateway.id
 }
