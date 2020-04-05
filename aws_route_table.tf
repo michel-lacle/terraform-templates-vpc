@@ -29,6 +29,8 @@ resource "aws_route_table_association" "public_route_table_association" {
   subnet_id = aws_subnet.template-public.id
 }
 
+# add a route for traffic to the internet through the NAT gateway
+# this way our private subnet can access the internet
 resource "aws_default_route_table" "default-route-table" {
   default_route_table_id = aws_vpc.template-vpc.default_route_table_id
 
