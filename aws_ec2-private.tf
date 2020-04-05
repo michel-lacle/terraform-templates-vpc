@@ -47,6 +47,8 @@ resource "aws_instance" "private-ec2-webserver" {
 
   user_data = file("webserver_install.sh")
 
+  # we set this to true, even though we are on a private subnet to test out
+  # the fact that our private subnet does not have a route to the internet
   associate_public_ip_address = true
 
   vpc_security_group_ids = [
