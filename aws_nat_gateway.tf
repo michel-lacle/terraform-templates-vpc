@@ -1,7 +1,7 @@
 resource "aws_eip" "nat-elastic-ip" {
   vpc = true
 
-  depends_on                = [aws_internet_gateway.template-internet-gateway.id]
+  depends_on                = ["aws_internet_gateway.template-internet-gateway"]
 }
 
 resource "aws_nat_gateway" "nat-gateway" {
