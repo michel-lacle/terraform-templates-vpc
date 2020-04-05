@@ -1,7 +1,8 @@
 resource "aws_network_acl" "main-acl" {
   vpc_id = aws_vpc.template-vpc.id
 
-  subnet_ids = [aws_subnet.template-public.id]
+  subnet_ids = [
+    aws_subnet.template-public.id]
 
   ingress {
     action = "allow"
@@ -9,6 +10,7 @@ resource "aws_network_acl" "main-acl" {
     protocol = "tcp"
     rule_no = 100
     to_port = 80
+    cidr_block = "0.0.0.0/0"
   }
 
   ingress {
@@ -17,6 +19,7 @@ resource "aws_network_acl" "main-acl" {
     protocol = "tcp"
     rule_no = 200
     to_port = 443
+    cidr_block = "0.0.0.0/0"
   }
 
   ingress {
@@ -25,6 +28,8 @@ resource "aws_network_acl" "main-acl" {
     protocol = "tcp"
     rule_no = 300
     to_port = 22
+    cidr_block = "0.0.0.0/0"
+
   }
 
   tags = {
