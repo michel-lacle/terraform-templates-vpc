@@ -28,3 +28,24 @@ resource "aws_route_table_association" "public_route_table_association" {
   route_table_id = aws_route_table.public_route_table.id
   subnet_id = aws_subnet.template-public.id
 }
+
+# our private subnet needs a route to the internet through the
+# NAT gateway, so we query for the main route table, then
+# add the route
+
+# let's find our main route table
+data "aws_route_tables" "main-route-table" {
+  vpc_id = aws_vpc.template-vpc.id
+
+  filter {
+    name   = "tag:Name"
+    values = ["!public-route-table"]
+  }
+}
+
+resource "aws_route" "r" {
+  count                     = length(data.aws_route_tables.main-route-table.ids)
+  route_table_id            = data.aws_route_tables.main-route-table.ids[0]
+  destination_cidr_block    = "0.0.0.0/0"
+  nat_gateway_id = aws_nat_gateway.nat-gateway.id
+}
