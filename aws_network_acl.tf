@@ -3,13 +3,29 @@ resource "aws_network_acl" "main-acl" {
 
   subnet_ids = [aws_subnet.template-public.id]
 
-/*  ingress {
-    action = ""
-    from_port = 0
-    protocol = ""
-    rule_no = 0
-    to_port = 0
-  }*/
+  ingress {
+    action = "allow"
+    from_port = 80
+    protocol = "tcp"
+    rule_no = 100
+    to_port = 80
+  }
+
+  ingress {
+    action = "allow"
+    from_port = 443
+    protocol = "tcp"
+    rule_no = 100
+    to_port = 443
+  }
+
+  ingress {
+    action = "allow"
+    from_port = 22
+    protocol = "tcp"
+    rule_no = 100
+    to_port = 22
+  }
 
   tags = {
     Name = "main-acl"
