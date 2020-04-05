@@ -22,6 +22,7 @@ resource "aws_route_table" "public_route_table" {
   }
 }
 
+/*
 resource "aws_default_route_table" "default-route-table" {
   default_route_table_id = aws_vpc.template-vpc.default_route_table_id
 
@@ -35,4 +36,4 @@ resource "aws_default_route_table" "default-route-table" {
     Owner = "terraform-templates-vpc"
     Project = "terraform-templates-vpc"
   }
-}
+}*/
