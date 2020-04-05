@@ -22,30 +22,17 @@ resource "aws_route_table" "public_route_table" {
   }
 }
 
-# we link our public route table to our public subnet
-resource "aws_route_table_association" "public_route_table_association" {
+resource "aws_default_route_table" "default-route-table" {
+  default_route_table_id = aws_vpc.template-vpc.default_route_table_id
 
-  route_table_id = aws_route_table.public_route_table.id
-  subnet_id = aws_subnet.template-public.id
-}
-
-# our private subnet needs a route to the internet through the
-# NAT gateway, so we query for the main route table, then
-# add the route
-
-# let's find our main route table
-data "aws_route_tables" "main-route-table" {
-  vpc_id = aws_vpc.template-vpc.id
-
-  filter {
-    name   = "tag:Name"
-    values = [""]
+  route {
+    cidr_block = "0.0.0.0/0"
+    nat_gateway_id = aws_nat_gateway.nat-gateway.id
   }
-}
 
-resource "aws_route" "r" {
-  count                     = length(data.aws_route_tables.main-route-table.ids)
-  route_table_id            = data.aws_route_tables.main-route-table.ids[count.index]
-  destination_cidr_block    = "0.0.0.0/0"
-  nat_gateway_id = aws_nat_gateway.nat-gateway.id
+  tags = {
+    Name = "main-route-table"
+    Owner = "terraform-templates-vpc"
+    Project = "terraform-templates-vpc"
+  }
 }
