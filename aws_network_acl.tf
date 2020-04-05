@@ -29,7 +29,15 @@ resource "aws_network_acl" "main-acl" {
     rule_no = 300
     to_port = 22
     cidr_block = "0.0.0.0/0"
+  }
 
+  egress {
+    action = "allow"
+    from_port = 80
+    protocol = "tcp"
+    rule_no = 100
+    to_port = 80
+    cidr_block = "0.0.0.0/0"
   }
 
   tags = {
