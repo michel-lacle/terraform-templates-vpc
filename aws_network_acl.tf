@@ -96,6 +96,24 @@ resource "aws_network_acl" "public-acl" {
 resource "aws_default_network_acl" "default-acl" {
   default_network_acl_id = aws_vpc.template-vpc.default_network_acl_id
 
+  ingress {
+    protocol = -1
+    rule_no = 100
+    action = "allow"
+    cidr_block = aws_vpc.template-vpc.cidr_block
+    from_port = 0
+    to_port = 0
+  }
+
+  egress {
+    protocol = -1
+    rule_no = 100
+    action = "allow"
+    cidr_block = "0.0.0.0/0"
+    from_port = 0
+    to_port = 0
+  }
+
   tags = {
     Name = "default-acl"
     Owner = "terraform-templates-vpc"
