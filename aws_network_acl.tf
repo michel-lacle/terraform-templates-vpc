@@ -9,7 +9,7 @@ resource "aws_network_acl" "main-acl" {
     from_port = 0
     protocol = "all"
     rule_no = 100
-    to_port = 800
+    to_port = 0
     cidr_block = "0.0.0.0/0"
   }
 
