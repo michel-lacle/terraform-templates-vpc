@@ -1,9 +1,10 @@
 resource "aws_network_acl" "main-acl" {
   vpc_id = aws_vpc.template-vpc.id
 
-  # subnet_ids = [
-  #   aws_subnet.template-public.id]
+  subnet_ids = [
+    aws_subnet.template-public.id]
 
+  # inbound http
   ingress {
     action = "allow"
     from_port = 80
@@ -13,13 +14,25 @@ resource "aws_network_acl" "main-acl" {
     cidr_block = "0.0.0.0/0"
   }
 
+  # inbound https
   ingress {
     action = "allow"
-    from_port = 0
+    from_port = 433
     protocol = "all"
     rule_no = 200
-    to_port = 0
-    ipv6_cidr_block = "::/0"
+    to_port = 433
+    cidr_block = "0.0.0.0/0"
+  }
+
+  # inbound ssh
+  ingress {
+    action = "allow"
+    from_port = 22
+    protocol = "all"
+    rule_no = 200
+    to_port = 22
+    cidr_block = "0.0.0.0/0"
+
   }
 
   egress {
