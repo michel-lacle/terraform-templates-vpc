@@ -35,22 +35,44 @@ resource "aws_network_acl" "main-acl" {
 
   }
 
+    # outbound http
   egress {
     action = "allow"
-    from_port = 0
-    protocol = "all"
+    from_port = 80
+    protocol = "tcp"
     rule_no = 100
-    to_port = 0
+    to_port = 80
     cidr_block = "0.0.0.0/0"
   }
 
+  # outbound https
   egress {
     action = "allow"
-    from_port = 0
-    protocol = "all"
+    from_port = 433
+    protocol = "tcp"
     rule_no = 200
-    to_port = 0
-    ipv6_cidr_block = "::/0"
+    to_port = 433
+    cidr_block = "0.0.0.0/0"
+  }
+
+  # outbound ssh
+  egress {
+    action = "allow"
+    from_port = 22
+    protocol = "tcp"
+    rule_no = 300
+    to_port = 22
+    cidr_block = "0.0.0.0/0"
+  }
+
+    # outbound ephemeral
+  egress {
+    action = "allow"
+    from_port = 1024
+    protocol = "tcp"
+    rule_no = 300
+    to_port = 65335
+    cidr_block = "0.0.0.0/0"
   }
 
   tags = {
