@@ -47,9 +47,10 @@ resource "aws_instance" "private-ec2-webserver" {
 
   user_data = file("webserver_install.sh")
 
-  # we set this to true, even though we are on a private subnet to test out
-  # the fact that our private subnet does not have a route to the internet
-  associate_public_ip_address = true
+  # let's make sure that we can't access this EC2 instance from the outside
+  # by not giving it a public IP. Additionally, we will setup a network
+  # ACL to deny all inbound traffic to the private subnet
+  associate_public_ip_address = false
 
   vpc_security_group_ids = [
     aws_security_group.ec2-private-sg-webserver.id]

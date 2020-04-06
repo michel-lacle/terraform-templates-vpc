@@ -1,4 +1,4 @@
-resource "aws_network_acl" "main-acl" {
+resource "aws_network_acl" "public-acl" {
   vpc_id = aws_vpc.template-vpc.id
 
   subnet_ids = [
@@ -86,8 +86,19 @@ resource "aws_network_acl" "main-acl" {
   }
 
   tags = {
-    Name = "main-acl"
+    Name = "public-acl"
     Owner = "terraform-templates-vpc"
     Project = "terraform-templates-vpc"
   }
 }
+
+resource "aws_default_network_acl" "default-acl" {
+  default_network_acl_id = aws_vpc.template-vpc.default_network_acl_id
+}
+
+
+  tags = {
+    Name = "default-acl"
+    Owner = "terraform-templates-vpc"
+    Project = "terraform-templates-vpc"
+  }
