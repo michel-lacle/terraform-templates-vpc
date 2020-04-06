@@ -93,6 +93,7 @@ resource "aws_network_acl" "public-acl" {
 }
 
 # the private subnet is automatically associated with the default acl
+# remember that we don't have a route to the private subnet from the outside
 resource "aws_default_network_acl" "default-acl" {
   default_network_acl_id = aws_vpc.template-vpc.default_network_acl_id
 
@@ -100,7 +101,7 @@ resource "aws_default_network_acl" "default-acl" {
     protocol = -1
     rule_no = 100
     action = "allow"
-    cidr_block = aws_vpc.template-vpc.cidr_block
+    cidr_block = "0.0.0.0/0"
     from_port = 0
     to_port = 0
   }
