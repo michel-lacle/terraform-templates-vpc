@@ -6,29 +6,20 @@ resource "aws_network_acl" "main-acl" {
 
   ingress {
     action = "allow"
-    from_port = 80
-    protocol = "tcp"
+    from_port = 0
+    protocol = "ALL"
     rule_no = 100
-    to_port = 80
+    to_port = 800
     cidr_block = "0.0.0.0/0"
   }
 
   ingress {
     action = "allow"
-    from_port = 443
+    from_port = 0
     protocol = "tcp"
     rule_no = 200
-    to_port = 443
-    cidr_block = "0.0.0.0/0"
-  }
-
-  ingress {
-    action = "allow"
-    from_port = 22
-    protocol = "tcp"
-    rule_no = 300
-    to_port = 22
-    cidr_block = "0.0.0.0/0"
+    to_port = 0
+    ipv6_cidr_block = "::/0"
   }
 
   egress {
