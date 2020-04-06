@@ -1,8 +1,8 @@
 resource "aws_network_acl" "main-acl" {
   vpc_id = aws_vpc.template-vpc.id
 
- # subnet_ids = [
- #   aws_subnet.template-public.id]
+  # subnet_ids = [
+  #   aws_subnet.template-public.id]
 
   ingress {
     action = "allow"
@@ -24,20 +24,20 @@ resource "aws_network_acl" "main-acl" {
 
   egress {
     action = "allow"
-    from_port = 80
-    protocol = "tcp"
+    from_port = 0
+    protocol = "all"
     rule_no = 100
-    to_port = 80
+    to_port = 0
     cidr_block = "0.0.0.0/0"
   }
 
-    egress {
+  egress {
     action = "allow"
-    from_port = 443
-    protocol = "tcp"
+    from_port = 0
+    protocol = "all"
     rule_no = 200
-    to_port = 443
-    cidr_block = "0.0.0.0/0"
+    to_port = 0
+    ipv6_cidr_block = "::/0"
   }
 
   tags = {
