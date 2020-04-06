@@ -29,7 +29,7 @@ resource "aws_network_acl" "main-acl" {
     action = "allow"
     from_port = 22
     protocol = "tcp"
-    rule_no = 200
+    rule_no = 300
     to_port = 22
     cidr_block = "0.0.0.0/0"
 
