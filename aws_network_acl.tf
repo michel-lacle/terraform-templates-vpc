@@ -35,7 +35,7 @@ resource "aws_network_acl" "main-acl" {
   }
 
   # inbound ephemeral
-  igress {
+  ingress {
     action = "allow"
     from_port = 1024
     protocol = "tcp"
