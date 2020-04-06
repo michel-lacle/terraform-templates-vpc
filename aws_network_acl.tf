@@ -6,10 +6,10 @@ resource "aws_network_acl" "main-acl" {
 
   ingress {
     action = "allow"
-    from_port = 0
-    protocol = "all"
+    from_port = 80
+    protocol = "tcp"
     rule_no = 100
-    to_port = 0
+    to_port = 80
     cidr_block = "0.0.0.0/0"
   }
 
