@@ -32,10 +32,20 @@ resource "aws_network_acl" "main-acl" {
     rule_no = 300
     to_port = 22
     cidr_block = "0.0.0.0/0"
-
   }
 
-    # outbound http
+  # inbound ephemeral
+  igress {
+    action = "allow"
+    from_port = 1024
+    protocol = "tcp"
+    rule_no = 400
+    to_port = 65335
+    cidr_block = "0.0.0.0/0"
+  }
+
+
+  # outbound http
   egress {
     action = "allow"
     from_port = 80
@@ -65,7 +75,7 @@ resource "aws_network_acl" "main-acl" {
     cidr_block = "0.0.0.0/0"
   }
 
-    # outbound ephemeral
+  # outbound ephemeral
   egress {
     action = "allow"
     from_port = 1024
