@@ -92,13 +92,15 @@ resource "aws_network_acl" "public-acl" {
   }
 }
 
+# the private subnet is automatically associated with the default acl
 resource "aws_default_network_acl" "default-acl" {
   default_network_acl_id = aws_vpc.template-vpc.default_network_acl_id
-}
-
 
   tags = {
     Name = "default-acl"
     Owner = "terraform-templates-vpc"
     Project = "terraform-templates-vpc"
   }
+}
+
+
