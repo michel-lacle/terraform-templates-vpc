@@ -70,7 +70,7 @@ resource "aws_network_acl" "main-acl" {
     action = "allow"
     from_port = 1024
     protocol = "tcp"
-    rule_no = 300
+    rule_no = 400
     to_port = 65335
     cidr_block = "0.0.0.0/0"
   }
